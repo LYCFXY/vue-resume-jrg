@@ -19,6 +19,8 @@ import ResumeEditor from './components/ResumeEditor'
 import ResumePreview from './components/ResumePreview'
 import icons from './assets/icons'
 
+import './assets/ui.scss'
+
 import store from './store/index'
 
 export default {
@@ -30,13 +32,13 @@ export default {
   },
   store,
   components: {Topbar, ResumeEditor, ResumePreview},
-  created(){
+  created() {
     document.body.insertAdjacentHTML('afterbegin', icons)
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .page{
        height: 100vh;
        display: flex;
@@ -46,13 +48,14 @@ export default {
           flex-grow: 1;
         }
         >main{
+          border: 1px solid #f60;
           min-width: 1024px;
           max-width: 1440px;
           margin-top: 16px;
           margin-bottom: 16px;
+          padding: 0 16px;
           display: flex;
           justify-content: space-between;
-          padding: 0 16px;
           width: 100%; /* 试试不加这句会怎样 */
           align-self: center;
         }

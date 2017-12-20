@@ -53,6 +53,5 @@ export default {
           background:#02af5f;
           color: white;
         }
-
     }
 </style>
