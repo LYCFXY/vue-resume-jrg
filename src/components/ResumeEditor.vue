@@ -13,18 +13,22 @@
         </nav>
         <ol class="panels">
             <li v-for="item in resume.config" v-show="item.field === selected">
+              <!-- 数据类型是数组的时候 -->
               <div v-if="resume[item.field] instanceof Array">
-                <div class="subitem" v-for="subitem in resume[item.field]">
+                <div class="subitem" v-for="(subitem, i) in resume[item.field]">
                   <div class="resumeField" v-for="(value, key) in subitem">
                     <label> {{ key }} </label>
-                    <input type="text" :value="value">
+                    <input type="text" :value="value" @input="changeResumeField(`${item.field}.${i}.${key}`, $event.target.value)">
+                    <!-- <input type="text" :value="value" @input="changeResumeField(item.field, key, $event.target.value)"> -->
                   </div>
                   <hr />
                 </div>
               </div>
+              <!-- 数据类型是json对象的时候 -->
               <div v-else class="resumeField" v-for="(value, key) in resume[item.field]">
-                <label> {{key}} </label>
-                <input type="text" v-model="resume[item.field][key]" />
+                <label> {{ key }} </label>
+                <!-- <input type="text" :value="value" @input="changeResumeField(item.field, key, $event.target.value)" /> -->
+                <input type="text" :value="value" @input="changeResumeField(`${item.field}.${key}`, $event.target.value)">
               </div>
             </li>
         </ol>
@@ -50,6 +54,14 @@
           },
           resume () {
             return this.$store.state.resume
+          }
+        },
+        methods: {
+          changeResumeField(path, value){
+            this.$store.dispatch('updateResume', {
+              path,
+              value
+            })
           }
         }
     }

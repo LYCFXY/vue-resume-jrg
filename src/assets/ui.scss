@@ -1,4 +1,14 @@
-svg.icon{
+  #resumeEditor{
+     width: 35%;
+     background: #777;
+   }
+   #resumePreview{
+     width: 61.66667%;
+     flex-grow: 1;
+     background: #ffffff;
+     margin-left: 16px;
+   }
+ svg.icon{
    height: 1em;
    width: 1em;
    fill: currentColor;
@@ -35,6 +45,7 @@ svg.icon{
 
  }
  .page{
+
    height: 100vh;
    display: flex;
    flex-direction: column;

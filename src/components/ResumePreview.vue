@@ -1,6 +1,66 @@
 <template>
     <div id="resumePreview">
-        {{ resume }}
+       <section data-name="profile">
+           <h1>
+               {{ resume.profile.name }}
+           </h1>
+           <h2>
+               {{ resume.profile.title }}
+           </h2>
+           <p>
+               <small>{{ resume.profile.city }}</small>
+               <small> {{ resume.profile.birthday }} </small>
+           </p>
+       </section>
+
+       <section data-name="workHistory" v-show="resume.workHistory">
+           <h2>工作经历</h2>
+           <ol>
+               <li v-for="item in resume.workHistory" :key="item.id">
+                  <h3>{{ item.company }}</h3>
+                  <p v-show="item.content">{{ item.content }}</p>
+               </li>
+           </ol>
+       </section>
+
+       <section data-name="education" v-show="resume.education">
+          <h2>毕业院校</h2>
+          <ol v-for="item in resume.education" :key="item.id">
+              <h3>{{ item.school }}
+                <span v-show="item.content"> - {{ item.content }}</span>
+              </h3>
+          </ol>
+       </section>
+
+       <section data-name="projects" v-show="resume.education">
+          <h2>项目经历</h2>
+          <ol>
+            <li v-for="item in resume.projects" :key="item.id">
+              <h3>{{ item.name }}</h3>
+              <p v-show="item.content">{{ item.content }}</p>
+            </li>
+          </ol>
+       </section>
+
+       <section data-name="awards" v-show="resume.awards">
+        <h2>获奖情况</h2>
+        <ol>
+          <li v-for="item in resume.awards" :key="item.id">
+            <h3>{{item.name}}</h3>
+            <p v-show="item.content"> {{item.content}} </p>
+          </li>
+        </ol>
+      </section>
+
+      <section data-name="contacts" v-show="resume.contacts">
+        <h2>联系方式</h2>
+        <table>
+          <tr v-for="item in resume.contacts" :key="item.id">
+            <td>{{item.contact}}</td>
+            <td v-show="item.content"> {{item.content}} </td>
+          </tr>
+        </table>
+      </section>
     </div>
 </template>
 
@@ -22,7 +82,7 @@
 
 <style lang="scss">
     #resumePreview {
-        display: flex;
+
         background:#ffffff;
         box-shadow:0 1px 3px 0 rgba(0,0,0,0.25);
         padding: 2em;
@@ -45,6 +105,7 @@
             white-space: pre-line;
         }
         section {
+
             > h2:first-child  {
                 background: #ddd;
                 display: inline-block;
@@ -61,14 +122,14 @@
 
         section[data-name="awards"],
         section[data-name="projects"],
-        section[data-name="wordHistory"] {
+        section[data-name="workHistory"] {
             li + li { margin-top: 1em; }
             li {
                 h3 {
                     border-bottom: 1px solid #999;
                     padding-bottom: .3em;
                     margin-bottom: .3em;
-                    margin-botom: .3em;
+                    margin-bottom: .3em;
                 }
             }
         }
