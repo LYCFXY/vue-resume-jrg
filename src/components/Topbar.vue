@@ -3,9 +3,10 @@
         <div class="wrapper">
             <span class="logo">Resumer</span>
             <div class="actions">
+              <span></span>  
               <a class="button primary" href="#" @click.prevent="signUpDialogVisible = true">注册</a>
               <MyDialog title="注册" :visible="signUpDialogVisible" @close="signUpDialogVisible = false">
-                我就是 slot 内容
+                <SignUpForm @success="login($event)" />
               </MyDialog>
               <a class="button" href="#">登录</a>
               <button class="button primary">保存</button>

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!-- 注册 -->
         <form @submit.prevent="signUp">
             <div class="row">
                 <label>用户名</label>
@@ -32,12 +33,19 @@
         },
         methods: {
             signUp () {
-                /*ES6结构赋值*/
+                /*ES6解构赋值*/
                 let {username, password} = this.formData
                 var user = new AV.User();
                 user.setUsername(username);
-                vuse.setPassword(password);
-                user.signUp().then((loginedUser) )
+                vusr.setPassword(password);
+                user.signUp().then((loginedUser) => {
+                    this.$emit('success', {
+                        username: loginedUser.attributes.username,
+                        id: loginedUser.id
+                    })
+                    }, (error) => {
+                        alert(JSON.stringify(error))
+                    })
             }
         }
     }
